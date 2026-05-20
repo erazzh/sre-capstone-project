@@ -1,0 +1,12 @@
+groups:
+  - name: sre-capstone-alerts
+    rules:
+      - alert: HighTrafficLoad
+        
+        expr: sum(rate(http_requests_total[15s])) > 2
+        for: 5s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High traffic detected on FastAPI app"
+          description: "App is receiving too many requests."
